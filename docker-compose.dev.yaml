@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./services/web
+    expose:
+      - 8000
+    volumes:
+      - ./services/web/:/app
+      - ./datasets:/datasets
+    command: gunicorn --bind 0.0.0.0:8000 --workers 3 --max-requests 1 --timeout 600 --reload app:app
+    depends_on:
+      - mongo
+
+  nginx:
+    build:
+      context: ./services/nginx
+      target: dev
+    volumes:
+      - ./datasets:/datasets
+    ports:
+      - 80:80
+    depends_on:
+      - web
+  
+  mongo:
+    image: mongo
+    volumes:
+      - ./db:/data/db
+    expose:
+      - 27017

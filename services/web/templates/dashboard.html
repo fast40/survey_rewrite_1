@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Datasets</title>
+    </head>
+    <body>
+        <h2>Create File Dataset</h2>
+        <form action="/create-dataset" method="post" enctype="multipart/form-data">
+            <input type="text" name="dataset_name" placeholder="Dataset name" pattern="\w+" required>
+            <input type="hidden" name="dataset_type" value="file">
+            <input type="file" name="zip_file" accept=".zip" required>
+            <input type="submit">
+        </form>
+        <h2>Create Table Dataset</h2>
+        <form action="/create-dataset" method="post" enctype="multipart/form-data">
+            <input type="text" name="dataset_name" placeholder="Dataset name" pattern="\w+" required>
+            <input type="hidden" name="dataset_type" value="table">
+            <input type="file" name="zip_file" accept=".zip" required>
+            <input type="submit">
+        </form>
+        <h2>Create Batch Dataset</h2>
+        <form action="/create-dataset" method="post" enctype="multipart/form-data">
+            <input type="text" name="dataset_name" placeholder="Dataset name" pattern="\w+" required>
+            <input type="hidden" name="dataset_type" value="batch">
+            <input type="file" name="zip_file" accept=".zip" required>
+            <input type="submit">
+        </form>
+        <h2>File Datasets</h2>
+        <div>
+            {% for file_dataset in file_datasets %}
+            <div class="dataset">
+                <span>{{ file_dataset }}</span>
+                <a href="/delete-dataset?dataset_type=file&dataset_name={{ file_dataset }}">delete</a>
+            </div>
+            {% endfor %}
+        </div>
+        <h2>Table Datasets</h2>
+        <div>
+            {% for table_dataset in table_datasets %}
+            <div class="dataset">
+                <span>{{ table_dataset }}</span>
+                <a href="/delete-dataset?dataset_type=table&dataset_name={{ table_dataset }}">delete</a>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>
