@@ -29,6 +29,9 @@ def _create_in_mongo(dataset_name: str, dataset_path: pathlib.Path, client: pymo
             continue
 
         for batch in container_folder.glob('*'):
+            if batch.name[0] == '.':
+                continue
+
             files = [str(path) for path in batch.rglob('*')]
             random.shuffle(files)
 
