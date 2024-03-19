@@ -24,6 +24,7 @@ def get_file(request: flask.Request, client: pymongo.MongoClient):
 
     if response is None:
         pipeline = [
+            {'$match': {'dataset_name': dataset_name}},
             {'$group': {'_id': None, 'max_uses': {'$max': '$uses'}}}
         ]
 
@@ -31,7 +32,7 @@ def get_file(request: flask.Request, client: pymongo.MongoClient):
         max_uses = max_uses['max_uses']
 
         pipeline = [
-            {"$match": {"uses": {"$lt": max_uses}}},
+            {"$match": {'dataset_name': dataset_name, "uses": {"$lt": max_uses}}},
             {"$sample": {"size": 1}}
         ]
 
@@ -40,7 +41,7 @@ def get_file(request: flask.Request, client: pymongo.MongoClient):
         if len(documents) == 0:
             print('test')
             pipeline = [
-                {"$match": {"uses": {"$lte": max_uses}}},
+                {"$match": {'dataset_name': dataset_name, "uses": {"$lte": max_uses}}},
                 {"$sample": {"size": 1}}
             ]
 
