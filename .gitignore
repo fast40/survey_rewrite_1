@@ -4,4 +4,4 @@ __pycache__
 db
 datasets
 *.zip
-*.txt
+test.txt
