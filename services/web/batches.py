@@ -25,6 +25,9 @@ def _create_on_disk(dataset_path: pathlib.Path, zip_file: str | IO) -> None:
 
 def _create_in_mongo(dataset_name: str, dataset_path: pathlib.Path, client: pymongo.MongoClient):
     for container_folder in dataset_path.glob('*'):
+        if container_folder.name[0] == '.':
+            continue
+
         for batch in container_folder.glob('*'):
             files = [str(path) for path in batch.rglob('*')]
             random.shuffle(files)
