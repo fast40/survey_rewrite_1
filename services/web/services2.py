@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+from urllib.parse import quote
 
 from flask import Response, redirect as flask_redirect
 
@@ -62,7 +63,7 @@ def get_file(request: flask.Request, client: pymongo.MongoClient):
         file =  response['batch']['files'][int(loop_number) - 1]
 
     if redirect.lower() == 'true' or redirect == '1':
-        return flask_redirect(file)
+        return flask_redirect(quote(file))
     else:
         response = Response(file)
         response.headers.add('Access-Control-Allow-Origin', '*')
