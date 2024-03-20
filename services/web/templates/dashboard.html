@@ -30,7 +30,7 @@
             {% for file_dataset in file_datasets %}
             <div class="dataset">
                 <span>{{ file_dataset }}</span>
-                <a href="/delete-dataset?dataset_type=file&dataset_name={{ file_dataset }}">delete</a>
+                <a href="/delete-dataset?dataset_type=file&dataset_name={{ file_dataset }}" rel="nofollow">delete</a>
             </div>
             {% endfor %}
         </div>
@@ -39,7 +39,7 @@
             {% for table_dataset in table_datasets %}
             <div class="dataset">
                 <span>{{ table_dataset }}</span>
-                <a href="/delete-dataset?dataset_type=table&dataset_name={{ table_dataset }}">delete</a>
+                <a href="/delete-dataset?dataset_type=table&dataset_name={{ table_dataset }}" rel="nofollow">delete</a>
             </div>
             {% endfor %}
         </div>
